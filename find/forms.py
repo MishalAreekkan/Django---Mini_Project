@@ -5,3 +5,4 @@ class Vehicleform(ModelForm):
     class Meta:   ## main's class decribe/ main class properties
         model = Vehicle_type
         fields = '__all__'
+        # app_label = 'find'

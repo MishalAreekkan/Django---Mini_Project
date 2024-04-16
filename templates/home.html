@@ -6,8 +6,8 @@
     <title>home</title>
 </head>
 <body>
-    <h1> home page
-    <form action="" method="post">
+    <h1> VEHICLE DETAILS
+    <form action="{% url "home" %}" method="post">
         {% csrf_token %}
         {{dict.as_p}}
         <button type="submit">ok</button>

@@ -39,5 +39,3 @@ def user_logout(request):
 def home(request):
     obj = Vehicleform()
     return render(request,"home.html",{"dict":obj})
-
-
