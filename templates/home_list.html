@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIST</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">LIST OF VEHICLES</h1>
+        <a href="{% url 'search' %}" class="btn btn-secondary">BACK</a>
+        <div class="row">
+            {% for x in data %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img class="card-img-top" src="{{ x.image.url }}" alt="vehicle image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ x.name }}</h5>
+                        <p class="card-text">{{ x.notes }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Owner: {{ x.owner }}</li>
+                        <li class="list-group-item">Registration Number: {{ x.register_no }}</li>
+                        <li class="list-group-item">Model: {{ x.model }}</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="{% url 'delete' x.id %}" class="card-link">Delete</a>
+                        <a href="{% url 'edit' x.id %}" class="card-link">Edit</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

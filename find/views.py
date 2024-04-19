@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import Vehicleform
+from .forms import Vehicleform,Searching
+from .models import Vehicle_type
 # Create your views here.
 
 def admins(request):
@@ -27,15 +28,61 @@ def user_login(request):
         log_name = request.POST["user_name"]
         log_pass = request.POST["pass_word"]
         user = authenticate(username = log_name,password = log_pass)
+        print(user)
         if user:
             login(request,user)
-            return redirect("home")
+            
+            request.session["user_session"] = "new_user"
+            return redirect("search")
     return render(request,"login.html")
 
 def user_logout(request):
     logout(request)
+    return redirect("login")
+
+def home(request):
+    form = Vehicleform(request.POST,request.FILES)
+    if request.method == 'POST':
+        print(form)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            register_no = form.cleaned_data['register_no']
+            owner = form.cleaned_data['owner']
+            model = form.cleaned_data['model']
+            image = form.cleaned_data['image']
+            notes = form.cleaned_data['notes']
+            print(name,register_no,owner,model,image,notes)
+            form.save()
+            return redirect('homelist')
+    return render(request,"home.html",{"dict":form})
 
 @login_required(login_url="login")
-def home(request):
-    obj = Vehicleform()
-    return render(request,"home.html",{"dict":obj})
+def searching(request):
+    form = Searching() 
+    vehicles = None
+    if request.method == "POST":
+        form = Searching(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data['search']
+            vehicles = Vehicle_type.objects.filter(register_no=data)
+            
+    return render(request,"search.html",{'form':form,'vehicles':vehicles})
+
+def home_list(reqeust):
+    data = Vehicle_type.objects.all()
+    # print(Vehicle_type.objects.get(owner = "maiz"))
+    return render(reqeust,"home_list.html",{"data":data})
+
+def deleting(request,id):
+    deleted_one = Vehicle_type.objects.get(id=id)
+    deleted_one.delete()
+    return redirect("homelist")
+
+def editing(request,id):
+    edited_one = Vehicle_type.objects.get(id=id)
+    edited_form = Vehicleform(request.POST,instance= edited_one)
+    if edited_form.is_valid():
+        edited_one.save()
+        return redirect("/homelist")
+    edited_form = Vehicleform(instance = edited_one)
+    return render(request,"edit.html",{"data":edited_form})

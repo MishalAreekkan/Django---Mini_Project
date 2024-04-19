@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEARCH</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-4">Search Page</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary">SEARCH</button>
+            <a href="{% url 'logout' %}" class="btn btn-secondary">Logout</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary ml-2">Register</a>
+        </form>
+        
+        <div class="row mt-4">
+            {% for v in vehicles %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img class="card-img-top" src="{{ v.image.url }}" alt="vehicle image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ v.name }}</h5>
+                        <p class="card-text">{{ v.notes }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Owner:</strong> {{ v.owner }}</li>
+                        <li class="list-group-item"><strong>Registration Number:</strong> {{ v.register_no }}</li>
+                        <li class="list-group-item"><strong>Model:</strong> {{ v.model }}</li>
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

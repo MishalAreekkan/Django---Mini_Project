@@ -4,7 +4,8 @@ from django.db import models
 
 class Vehicle_type(models.Model):
     name = models.CharField(max_length=250)
+    register_no = models.CharField(max_length=100)
     owner = models.CharField(max_length=250)
-    model = models.IntegerField(null=True)
+    model = models.IntegerField()
+    image = models.ImageField(upload_to="cars/")
     notes = models.TextField()
-    
