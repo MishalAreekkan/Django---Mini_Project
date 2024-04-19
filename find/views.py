@@ -41,6 +41,8 @@ def user_logout(request):
     return redirect("login")
 
 def home(request):
+    l = request.GET.get("owner")
+    print(l)
     form = Vehicleform(request.POST,request.FILES)
     if request.method == 'POST':
         print(form)
@@ -69,9 +71,13 @@ def searching(request):
     return render(request,"search.html",{'form':form,'vehicles':vehicles})
 
 def home_list(reqeust):
+    # message = "hello {} how are you".format(q)
     data = Vehicle_type.objects.all()
+    context = {
+        "data":data,
+    }
     # print(Vehicle_type.objects.get(owner = "maiz"))
-    return render(reqeust,"home_list.html",{"data":data})
+    return render(reqeust,"home_list.html",context)
 
 def deleting(request,id):
     deleted_one = Vehicle_type.objects.get(id=id)
@@ -86,3 +92,13 @@ def editing(request,id):
         return redirect("/homelist")
     edited_form = Vehicleform(instance = edited_one)
     return render(request,"edit.html",{"data":edited_form})
+
+
+
+
+
+
+# def qry(request):
+#     q = request.GET.get("name")
+#     message = "hello {} how are you".format(q)
+#     return render(request,"qrys.html",{"message":message})

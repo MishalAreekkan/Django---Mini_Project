@@ -10,4 +10,5 @@ urlpatterns = [
     path("homelist",views.home_list,name="homelist"),
     path("delete/<id>",views.deleting,name="delete"),
     path("editing/<id>",views.editing,name="edit"),
+    # path("qry",views.qry,name="qry")
 ]
