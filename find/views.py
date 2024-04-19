@@ -86,13 +86,12 @@ def deleting(request,id):
 
 def editing(request,id):
     edited_one = Vehicle_type.objects.get(id=id)
-    edited_form = Vehicleform(request.POST,instance= edited_one)
-    if edited_form.is_valid():
+    form = Vehicleform(request.POST,instance= edited_one)
+    if form.is_valid():
         edited_one.save()
         return redirect("/homelist")
-    edited_form = Vehicleform(instance = edited_one)
-    return render(request,"edit.html",{"data":edited_form})
-
+    form = Vehicleform(instance = edited_one)
+    return render(request,"edit.html",{"data":form})
 
 
 
