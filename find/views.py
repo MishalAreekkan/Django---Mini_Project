@@ -71,12 +71,12 @@ def searching(request):
     return render(request,"search.html",{'form':form,'vehicles':vehicles})
 
 def home_list(reqeust):
-    # message = "hello {} how are you".format(q)
+    message = "hello {} how are you".format(q)
     data = Vehicle_type.objects.all()
     context = {
         "data":data,
     }
-    # print(Vehicle_type.objects.get(owner = "maiz"))
+    print(Vehicle_type.objects.get(owner = "maiz"))
     return render(reqeust,"home_list.html",context)
 
 def deleting(request,id):
@@ -97,7 +97,7 @@ def editing(request,id):
 
 
 
-# def qry(request):
-#     q = request.GET.get("name")
-#     message = "hello {} how are you".format(q)
-#     return render(request,"qrys.html",{"message":message})
+def qry(request):
+    q = request.GET.get("name")
+    message = "hello {} how are you".format(q)
+    return render(request,"qrys.html",{"message":message})
