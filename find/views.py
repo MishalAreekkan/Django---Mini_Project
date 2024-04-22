@@ -70,28 +70,28 @@ def searching(request):
             
     return render(request,"search.html",{'form':form,'vehicles':vehicles})
 
-# def home_list(reqeust):
-#     # message = "hello {} how are you".format(q)
-#     data = Vehicle_type.objects.all()
-#     context = {
-#         "data":data,
-#     }
-#     # print(Vehicle_type.objects.get(owner = "maiz"))
-#     return render(reqeust,"home_list.html",context)
+def home_list(reqeust):
+    # message = "hello {} how are you".format(q)
+    data = Vehicle_type.objects.all()
+    context = {
+        "data":data,
+    }
+    # print(Vehicle_type.objects.get(owner = "maiz"))
+    return render(reqeust,"home_list.html",context)
 
 def deleting(request,id):
     deleted_one = Vehicle_type.objects.get(id=id)
     deleted_one.delete()
     return redirect("homelist")
 
-# def editing(request,id):
-#     edited_one = Vehicle_type.objects.get(id=id)
-#     form = Vehicleform(request.POST,instance= edited_one)
-#     if form.is_valid():
-#         edited_one.save()
-#         return redirect("/homelist")
-#     form = Vehicleform(instance = edited_one)
-#     return render(request,"edit.html",{"data":form})
+def editing(request,id):
+    edited_one = Vehicle_type.objects.get(id=id)
+    form = Vehicleform(request.POST,instance= edited_one)
+    if form.is_valid():
+        edited_one.save()
+        return redirect("/homelist")
+    form = Vehicleform(instance = edited_one)
+    return render(request,"edit.html",{"data":form})
 
 
 
