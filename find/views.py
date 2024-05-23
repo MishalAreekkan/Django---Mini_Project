@@ -84,14 +84,14 @@ def deleting(request,id):
     deleted_one.delete()
     return redirect("homelist")
 
-def editing(request,id):
-    edited_one = Vehicle_type.objects.get(id=id)
-    form = Vehicleform(request.POST,instance= edited_one)
-    if form.is_valid():
-        edited_one.save()
-        return redirect("/homelist")
-    form = Vehicleform(instance = edited_one)
-    return render(request,"edit.html",{"data":form})
+# def editing(request,id):
+#     edited_one = Vehicle_type.objects.get(id=id)
+#     form = Vehicleform(request.POST,instance= edited_one)
+#     if form.is_valid():
+#         edited_one.save()
+#         return redirect("/homelist")
+#     form = Vehicleform(instance = edited_one)
+#     return render(request,"edit.html",{"data":form})
 
 
 
