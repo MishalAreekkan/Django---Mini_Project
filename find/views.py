@@ -31,7 +31,6 @@ def user_login(request):
         print(user)
         if user:
             login(request,user)
-            
             request.session["user_session"] = "new_user"
             return redirect("search")
     return render(request,"login.html")
@@ -71,7 +70,6 @@ def searching(request):
     return render(request,"search.html",{'form':form,'vehicles':vehicles})
 
 def home_list(reqeust):
-    # message = "hello {} how are you".format(q)
     data = Vehicle_type.objects.all()
     context = {
         "data":data,
