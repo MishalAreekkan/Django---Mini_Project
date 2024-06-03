@@ -94,8 +94,3 @@ def editing(request,id):
 
 
 
-
-# def qry(request):
-#     q = request.GET.get("name")
-#     message = "hello {} how are you".format(q)
-#     return render(request,"qrys.html",{"message":message})
