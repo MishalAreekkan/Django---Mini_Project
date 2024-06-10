@@ -31,7 +31,6 @@ def user_login(request):
         print(user)
         if user:
             login(request,user)
-            request.session["user_session"] = "new_user"
             return redirect("search")
     return render(request,"login.html")
 
