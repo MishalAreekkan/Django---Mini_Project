@@ -12,7 +12,6 @@ def admins(request):
         em=request.POST["email"]
         passw = request.POST["password"]
         cnpass= request.POST["conpassword"]
-    
         if len(uname)<4:
             return HttpResponse("name shaoud have 4 letters")
         if not uname.isalpha():
