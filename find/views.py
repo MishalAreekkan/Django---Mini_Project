@@ -73,7 +73,7 @@ def home_list(reqeust):
     context = {
         "data":data,
     }
-    # print(Vehicle_type.objects.get(owner = "maiz"))
+    print(Vehicle_type.objects.get(owner = "maiz"))
     return render(reqeust,"home_list.html",context)
 
 def deleting(request,id):
