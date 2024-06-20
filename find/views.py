@@ -6,22 +6,22 @@ from .forms import Vehicleform,Searching
 from .models import Vehicle_type
 # Create your views here.
 
-def admins(request):
-    if request.POST:
-        uname= request.POST["username"]
-        em=request.POST["email"]
-        passw = request.POST["password"]
-        cnpass= request.POST["conpassword"]
-        if len(uname)<4:
-            return HttpResponse("name shaoud have 4 letters")
-        if not uname.isalpha():
-            return HttpResponse("name should n't contain number")
-        if len(passw)<2:
-            return HttpResponse("password should contain minimum 4 characters")
-        if passw == cnpass:
-            User.objects.create_user(username=uname,password=passw,email=em)
-            return render(request,"login.html")
-    return render(request,"admin.html")
+# def admins(request):
+#     if request.POST:
+#         uname= request.POST["username"]
+#         em=request.POST["email"]
+#         passw = request.POST["password"]
+#         cnpass= request.POST["conpassword"]
+#         if len(uname)<4:
+#             return HttpResponse("name shaoud have 4 letters")
+#         if not uname.isalpha():
+#             return HttpResponse("name should n't contain number")
+#         if len(passw)<2:
+#             return HttpResponse("password should contain minimum 4 characters")
+#         if passw == cnpass:
+#             User.objects.create_user(username=uname,password=passw,email=em)
+#             return render(request,"login.html")
+#     return render(request,"admin.html")
 
 def user_login(request):
     if request.method == "POST":
